@@ -1,0 +1,13 @@
+body{
+   background-color: #F9F4E4;
+}
+
+.bg-nav-color{
+   background-color: #f6e29a;
+}
+
+@media(min-width: 768px){
+   .oculto{
+      display: none;
+   }
+}

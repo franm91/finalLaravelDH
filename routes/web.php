@@ -1,17 +1,12 @@
 <?php
 
-use App\Usuario;
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+   return redirect()->route('home');
 });
 
-Route::get('/usuarios', function () {
-<<<<<<< HEAD
-    $usuarios = \App\Usuario::all();
-    return $usuarios;
-=======
-   $usuarios = \App\Usuario::all();
-   return $usuarios;
->>>>>>> 5283485254bf4dc9263ba1597867a404cbb3002c
-});
+Route::resource('/posts','PostsController');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
