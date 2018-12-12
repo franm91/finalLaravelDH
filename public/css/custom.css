@@ -1,13 +1,25 @@
 body{
-   background-color: #F9F4E4;
+   background-color: #dad9d8;
 }
 
 .bg-nav-color{
-   background-color: #f6e29a;
+   background-color: #1f7fa1;
 }
 
 @media(min-width: 768px){
-   .oculto{
+   .oculto-md{
+      display: none;
+   }
+}
+
+@media(max-width: 992px){
+   .oculto-lg{
+      display: none;
+   }
+}
+
+@media(max-width: 576px){
+   .oculto-sm{
       display: none;
    }
 }

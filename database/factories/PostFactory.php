@@ -4,7 +4,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Post::class, function (Faker $faker) {
     return [
-      'title' => $faker->town,
-      'text' => $faker->text
+      'title' => $faker->name,
+      'text' => $faker->text,
+      'user_id' => App\User::all()->random()->id
     ];
 });

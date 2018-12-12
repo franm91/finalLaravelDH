@@ -10,3 +10,4 @@ Route::resource('/posts','PostsController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/feed', 'HomeController@feed');
