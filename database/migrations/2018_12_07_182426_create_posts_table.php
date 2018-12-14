@@ -18,9 +18,9 @@ class CreatePostsTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('title', 100);
+            $table->string('title', 100)->nullable();
             $table->string('text', 600);
-            $table->string('attached', 100)->nullable()->default('/images/default.jpg');
+            $table->string('attached', 100)->nullable();
         });
     }
 
