@@ -1,13 +1,24 @@
 <?php
 
-Auth::routes();
-
 Route::get('/', function(){
-   return redirect()->route('home');
+   return redirect('/index');
 });
 
-Route::resource('/posts','PostsController');
+Route::middleware('auth')->group(function ()
+{
+	Route::get('/posts/create', 'PostsController@create')->name('posts.create');
+	Route::delete('/posts/{id}', 'PostsController@destroy')->name('posts.destroy');
+	Route::get('/posts/{id}/edit', 'PostsController@edit')->name('posts.edit');
+	Route::get('/posts', 'PostsController@index')->name('posts.index');
+	Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/posts', 'PostsController')->except(['create', 'destroy', 'edit', 'index', 'show']);
 
-Route::get('/feed', 'HomeController@feed');
+Auth::routes();
+
+Route::get('/profile', 'Auth\LoginController@showProfile')->name('profile')->middleware('auth');
+
+Route::get('/index', 'HomeController@index')->name('home');
+
+

@@ -3,17 +3,21 @@ body{
 }
 
 .bg-nav-color{
-   background-color: #1f7fa1;
+   background-color: #1f7ea1;
 }
 
-@media(min-width: 768px){
-   .oculto-md{
-      display: none;
-   }
+.card-img-top{
+   width: 25%;
 }
 
 @media(max-width: 992px){
    .oculto-lg{
+      display: none;
+   }
+}
+
+@media(min-width: 768px){
+   .oculto-md{
       display: none;
    }
 }

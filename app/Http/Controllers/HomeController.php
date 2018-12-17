@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -23,10 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
-    }
-
-    public function feed(){
-        return view('feed');
+      $posts = Post::orderBy('created_at', 'desc')->paginate(4);
+        
+      return view('index')->with(compact('posts'));
     }
 }
