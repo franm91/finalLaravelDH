@@ -8,7 +8,7 @@
                 <div class="card-header">Registrate</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" novalidate>
+                    <form method="POST" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
                         @csrf
 
                         <div class="form-group row">
@@ -99,7 +99,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    {{ __('Register') }}
+                                    Registrarse
                                 </button>
                             </div>
                         </div>

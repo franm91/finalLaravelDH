@@ -38,10 +38,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showProfile(){
-        $user = Auth::user();
-
-        return view('auth.profile')->with(compact('user'));
-    }
-
 }

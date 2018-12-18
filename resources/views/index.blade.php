@@ -40,15 +40,36 @@
 
             <!-- Search Widget -->
             <div class="card">
-              <h5 class="card-header">Register</h5>
+              <h5 class="card-header">Registro</h5>
               <div class="card-body">
                 <div class="input-group">
-                  <form id="registro" class="form-group" action="/action_page.php">
+                  <form class="form-group" method="POST" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
+                    @csrf
                     
-                      <h2>crea tu cuenta</h2>
-                      <input type="text" class="form-control mb-1" placeholder="Nombre" name="nombre" value="">
-                      <input type="text" class="form-control mb-1" placeholder="Apellido" name="apellido" value="">
-                      <input type="text" class="form-control mb-1" placeholder="Email" name="email" value="">
+                      <h2 class="text-align-center">Crea tu Cuenta</h2>
+                    <div class="form-group row">
+                        <input id="name" type="text" class="form-control mb-1{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Nombre">
+                        @if ($errors->has('name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                        @endif
+                  
+                        <input id="last_name" type="text" class="form-control mb-1{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" placeholder="Apellido">
+                        @if ($errors->has('last_name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('last_name') }}</strong>
+                            </span>
+                        @endif
+                            
+                        <input id="email" type="email" class="form-control mb-1{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="email">
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+
+
                       <select class="form-control mb-1" name="paisUsuario">
                         <option value=0>Seleccione un País</option>
                         <?php
@@ -59,13 +80,41 @@
                             </option>
                         <?php } ?>
                       </select>
-                      <input type="text" class="form-control mb-1" placeholder="Nombre de usuario" name="userName" value="">
-                      <input  class="form-control-file mb-1" type="file" id="avatar" name="foto">
-                      <input type="password" class="form-control mb-1" placeholder="Ingresa tu contraseña" name="contrasena">
-                      <input type="password" class="form-control mb-1" placeholder="Repite tu contraseña" name="checkContrasena">
+                      <div class="form-group row mb-1">
+                        <div class="col-12">
+                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Foto de perfil
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input{{ $errors->has('avatar') ? ' is-invalid' : '' }}" id="avatar" name="avatar">
+                                        
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            @if ($errors->has('avatar'))
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $errors->first('avatar') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                      </div>
+
+                      <input id="password" type="password" class="form-control mb-1{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Contraseña" required>
+
+                      @if ($errors->has('password'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('password') }}</strong>
+                          </span>
+                      @endif
+
+                      <input id="password-confirm" type="password" class="form-control mb-4" name="password_confirmation" placeholder="Repeti la contraseña" required>
 
         
                       <button type="submit" class="btn btn-primary btn-block">Confirm</button>
+                    </div>
   
                   </form>
                 </div>
@@ -81,7 +130,7 @@
                     
            
             <div class="card mb-4">
-              <a href="#">
+              <a href="/profile">
                 <div class="card-header text-dark">
                   <img class="rounded-circle"src="storage/avatars/{{$post->user->avatar}}" width="30px" alt=""> {{$post->user->getFullName()}}
                 </div>

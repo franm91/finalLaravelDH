@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/posts';
 
     /**
      * Create a new controller instance.
@@ -68,6 +68,8 @@ class RegisterController extends Controller
             'avatar.image' => 'La imagen debe ser (jpeg, png, bmp, gif, or svg)'
         ];
 
+        
+
         return Validator::make($data, $rules, $messages);
     }
 
@@ -79,9 +81,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $ext = $data['avatar']->extension();
+        $imgNombre = $data['email'] . "." . $ext;
+        $data['avatar']->storeAs('public/avatars/', $imgNombre);
+
+
         return User::create([
             'name' => $data['name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'avatar' => $imgNombre,
             'password' => Hash::make($data['password']),
         ]);
     }

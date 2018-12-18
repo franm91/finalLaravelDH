@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-nav-color">
    <div class="container">
-      <a class="navbar-brand" href="#"> <img src="{{asset('images/mundo.png')}}" style="width:50px" alt=""> Meet Travelers</a>  
+      <a class="navbar-brand" href="/index"> <img src="{{asset('images/mundo.png')}}" style="width:50px" alt=""> Meet Travelers</a>  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,12 +13,9 @@
          <!-- Left Side Of Navbar -->
          <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-               <a class="nav-link" href="#">Home
+               <a class="nav-link" href="/posts">Home
                   <span class="sr-only">(current)</span>
                </a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
                <a class="nav-link" href="#">FAQ</a>
@@ -46,8 +43,8 @@
                @if(Auth::check())
                    <li class="nav-item {{ Request::is('register') ? 'active' : '' }}">
                      <span class="nav-link text-light">
-                          <a class="font-weight-bold text-white" href="#PERFIL">
-                           <img class="rounded-circle" src="/storage/avatars/profile.jpg" width="44px" alt="">  
+                          <a class="font-weight-bold text-white" href="/profile">
+                           <img class="rounded-circle" src="storage/avatars/{{Auth::user()->avatar}}" width="44px" alt="">  
                            {{Auth::user()->getFullName()}}</a>
                      </span>
                    </li>

@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       // $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -24,8 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
+      if (\Auth::check()){
+        return redirect('profile');
+      }
+
+
       $posts = Post::orderBy('created_at', 'desc')->paginate(4);
         
       return view('index')->with(compact('posts'));
     }
+
+    public function showProfile(){
+      $user = \Auth::user();
+      if($user){
+        return view('auth.profile')->with(compact('user'));
+      }else{
+        return redirect('login');
+      }
+  }
 }
