@@ -35,15 +35,23 @@
                          <div class="row">
                            <div class="col-12">
                              <ul> <h6> Listado de paises donde estuviste</h6>
-                               @forelse ($posts as $post)
-                               <li>
-
-                                 <a href="/posts/{{$post->id}}">{{$post->country}}</a>
-                                </li>
+                             
                                
-                               @empty
-                                <h6>:( no hiciste ningun viaje aún</h6>
-                               @endforelse
+                            
+
+                               @foreach ($posts as $post)
+                                @if ($post->country !== null)
+                                  <li>
+                                    <a href="/posts/{{$post->id}}">{{$post->country}}</a>
+                                  </li>
+                                
+                                @else
+
+                                <li>:( no comentaste de ningun pais todavia</li>
+                                  @break
+                                @endif
+                                   
+                               @endforeach
                               </ul>
                               
                
@@ -52,20 +60,13 @@
                        </div>
                      </div>
            
-                     <!-- Side Widget -->
-                     <div class="card my-4">
-                       <h5 class="card-header">Side Widget</h5>
-                       <div class="card-body">
-                         You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                       </div>
-                     </div>
-           
+                     
                    </div>
    
            <!-- Blog Entries Column -->
    
            
-           <div class="col-lg-8 col-md-8">
+           <div class="col-lg-  8 col-md-8">
             <form action="/posts" method="post" enctype="multipart/form-data">
               @csrf
                 <div>
@@ -192,7 +193,9 @@
               </div>
               <div class="card-footer text-muted">
                 {{$post->created_at}}
-                Posteado en <a href="/country/{{$post->country}}">{{$post->country}}</a>
+                Posteado en <a href="/country/{{$post->country}}">
+                  {{$post->country}}
+                </a>
               </div>
             </div>
               @empty

@@ -104,7 +104,7 @@ class PostsController extends Controller
 	{
 		$post->title = $request->input('title');
 		$post->text = $request->input('text');
-		$post->country = $request->input('country');
+		$post->country = $request->input('country') ? $request->input('country') : "Argentina";
     //	$post->city = $request->input('city');
     
 
