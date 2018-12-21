@@ -1,6 +1,9 @@
 @extends('templates.base')
 
 @section('content')
+<script>
+var paisSelect = "{{ old('country') }}";
+</script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
@@ -8,7 +11,7 @@
                 <div class="card-header">Registrate</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
+                    <form method="POST" id="formulario" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
                         @csrf
 
                         <div class="form-group row">
@@ -17,11 +20,9 @@
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <span id="error_name" class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
                             </div>
                         </div>
 
@@ -31,11 +32,9 @@
                                 <div class="col-md-6">
                                     <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
     
-                                    @if ($errors->has('last_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('last_name') }}</strong>
-                                        </span>
-                                    @endif
+                                    <span id="error_last_name" class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                      </span>
                                 </div>
                             </div>
 
@@ -45,11 +44,9 @@
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                <span class="invalid-feedback" id="error_email" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                  </span>
                             </div>
                         </div>
                         <div class="form-group row mb-1">
@@ -66,13 +63,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if ($errors->has('avatar'))
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $errors->first('avatar') }}</strong>
+                                  </span>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="country" class="col-md-4 col-form-label text-md-right">Pais</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="country" id="countries">
+                                    <option value="">Elegí un país</option>
+                                </select>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $errors->first('country') }}</strong>
+                                  </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row" style="display: none" id="cityCont">
+                            <label for="city" class="col-md-4 col-form-label text-md-right" >Provincia</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="city" id="cities">
+                                </select>
+                            </div>
+                        </div>
+					
                 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -80,11 +96,9 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                <span id="error_password" class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                  </span>
                             </div>
                         </div>
 
@@ -109,4 +123,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{asset('js/custom.js')}}"></script>
 @endsection

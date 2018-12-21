@@ -36,10 +36,18 @@ class HomeController extends Controller
 
     public function showProfile(){
       $user = \Auth::user();
+      $posts = \Auth::user()->posts()->get();
       if($user){
-        return view('auth.profile')->with(compact('user'));
+        return view('auth.profile')->with(compact('user', 'posts'));
       }else{
         return redirect('login');
       }
   }
+
+
+  public function faq(){
+    return view('faq');
+  }
+
+
 }

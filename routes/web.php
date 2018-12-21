@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function ()
 	Route::get('/posts', 'PostsController@index')->name('posts.index');
 });
 
-//Route::resource('/posts', 'PostsController')->except(['create', 'destroy', 'edit', 'index', 'show']);
+Route::resource('/posts', 'PostsController')->except(['create', 'destroy', 'edit', 'index', 'show']);
 
 Auth::routes();
 
@@ -21,4 +21,6 @@ Route::get('/profile', 'HomeController@showProfile')->name('profile');
 
 Route::get('/index', 'HomeController@index')->name('home');
 
+Route::get('/faq', 'HomeController@faq');
 
+Route::get('/country/{id}', 'PostsController@byCountry')->name('country.country');

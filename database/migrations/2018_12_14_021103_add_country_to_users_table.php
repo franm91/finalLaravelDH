@@ -14,7 +14,7 @@ class AddCountryToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('country')->after('email')->nullable();
+            $table->string('country')->after('email');
         });
     }
 

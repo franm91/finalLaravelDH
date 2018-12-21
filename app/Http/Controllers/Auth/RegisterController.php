@@ -48,11 +48,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+       
         $rules = [
             'name' => ['required', 'string', 'max:20'],
             'last_name' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'avatar' => ['required', 'image'],
+            'country' => ['required'],
+            'city' => ['required_if:country, Argentina'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ];
 
@@ -64,8 +68,13 @@ class RegisterController extends Controller
             'last_name.string' => 'El apellido solo pueden ser letras',
             'last_name.max' => 'Maximo 30 caracteres',
             'email' => 'Ingrese un email valido',
-            'avatar. required' => 'La foto de perfil es obligatoria',
-            'avatar.image' => 'La imagen debe ser (jpeg, png, bmp, gif, or svg)'
+            'avatar.required' => 'La foto de perfil es obligatoria',
+            'avatar.image' => 'La imagen debe ser (jpeg, png, bmp, gif, or svg)',
+            'country.required' => 'El pais es obligatorio',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.string' => 'La contraseña solo puede tener letras',
+            'password.min' => 'La contraseña debe tener mas de 6 caracteres',
+            'password.confirmed' => 'Las contraseñas no coinciden'
         ];
 
         
@@ -85,12 +94,17 @@ class RegisterController extends Controller
         $imgNombre = $data['email'] . "." . $ext;
         $data['avatar']->storeAs('public/avatars/', $imgNombre);
 
-
+        if(isset($data['city'])){
+            $city = $data['city'];
+        }else{$city = null;}
+     
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'avatar' => $imgNombre,
+            'country' => $data['country'],
+            'city' => $city,
             'password' => Hash::make($data['password']),
         ]);
     }

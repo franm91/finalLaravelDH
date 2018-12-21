@@ -104,7 +104,7 @@ class PostsController extends Controller
 	{
 		$post->title = $request->input('title');
 		$post->text = $request->input('text');
-	//	$post->country = $request->input('country');
+		$post->country = $request->input('country');
     //	$post->city = $request->input('city');
     
 
@@ -122,5 +122,14 @@ class PostsController extends Controller
         }
 		$post->user_id = Auth::user()->id;
 		$post->save();
-	}
+    }
+    
+
+    public function byCountry($country){
+        $posts = \App\Post::where('country', $country)->get();
+        return view('country.country')->with(compact('posts'));
+    }
 }
+
+
+

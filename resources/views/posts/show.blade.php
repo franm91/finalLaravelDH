@@ -132,16 +132,6 @@
 
     </div>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-nav-color">
-      <div class="container">
-        <p class="m-0 text-center text-black">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
-    </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
 
 @endsection

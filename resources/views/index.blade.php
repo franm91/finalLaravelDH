@@ -1,13 +1,12 @@
-@php
-    $paises = ["Argentina", "Brasil", "Bolivia", "Colombia", "Chile", "Peru"];
-@endphp
 
 @extends('templates.base')
 
 @section('title', 'Bienvenido a Meet Travelers')
 
 @section('content')
-
+  <script>
+    var paisSelect = "{{ old('country') }}";
+  </script>
 
     <!-- Page Content -->
     <div class="container mt-5">
@@ -29,7 +28,7 @@
               <h5 class="text-center"><strong>Viaja sin fronteras!!</strong></h5>
               <a href="#registro" class="btn btn-primary oculto-md btn-block">Be a Traveler!! &rarr;</a>
             </div>
-            <img class="" src="/images/turismo2.jpg" width="633" alt="Card image cap">
+            <img class="" src="/images/turismo2.jpg" width="100%" alt="Card image cap">
 
           </div> 
 
@@ -39,88 +38,86 @@
         <div class="col-md-5">
 
             <!-- Search Widget -->
-            <div class="card">
-              <h5 class="card-header">Registro</h5>
-              <div class="card-body">
-                <div class="input-group">
-                  <form class="form-group" method="POST" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
-                    @csrf
-                    
-                      <h2 class="text-align-center">Crea tu Cuenta</h2>
-                    <div class="form-group row">
-                        <input id="name" type="text" class="form-control mb-1{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Nombre">
-                        @if ($errors->has('name'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
+          <div class="card">
+            <h5 class="card-header">Registro</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <form class="form-group" method="POST" action="{{ route('register') }}"  enctype="multipart/form-data" novalidate>
+                  @csrf
+
+                  <h2 class="text-align-center">Crea tu Cuenta</h2>
+                  <div class="form-group row">
+                    <input id="name" type="text" class="form-control mb-1{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Nombre">
+                      <span id="error_name" class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first('name') }}</strong>
+                      </span>
+
+                    <input id="last_name" type="text" class="form-control mb-1{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" placeholder="Apellido">
+                        <span id="error_last_name" class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first('last_name') }}</strong>
                         </span>
-                        @endif
-                  
-                        <input id="last_name" type="text" class="form-control mb-1{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" placeholder="Apellido">
-                        @if ($errors->has('last_name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('last_name') }}</strong>
-                            </span>
-                        @endif
-                            
-                        <input id="email" type="email" class="form-control mb-1{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="email">
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
 
+                    <input id="email" type="email" class="form-control mb-1{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="email">
+                        <span class="invalid-feedback" id="error_email" role="alert">
+                          <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+           
+                
+                  <div class="form-group row mb-1">
+                    <div class="col-12">
+                      <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Foto de perfil
+                      </button>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input{{ $errors->has('avatar') ? ' is-invalid' : '' }}" id="avatar" name="avatar">
 
-                      <select class="form-control mb-1" name="paisUsuario">
-                        <option value=0>Seleccione un País</option>
-                        <?php
-                          foreach ($paises as $pais) {?>
-                            <option
-                              value="">
-                                <?php echo $pais;?>
-                            </option>
-                        <?php } ?>
-                      </select>
-                      <div class="form-group row mb-1">
-                        <div class="col-12">
-                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Foto de perfil
-                            </button>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input{{ $errors->has('avatar') ? ' is-invalid' : '' }}" id="avatar" name="avatar">
-                                        
-                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                    </div>
-                                </div>
-                            </div>
-                            @if ($errors->has('avatar'))
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $errors->first('avatar') }}</strong>
-                                </span>
-                            @endif
+                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                       </div>
-
-                      <input id="password" type="password" class="form-control mb-1{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Contraseña" required>
-
-                      @if ($errors->has('password'))
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $errors->first('password') }}</strong>
-                          </span>
-                      @endif
-
-                      <input id="password-confirm" type="password" class="form-control mb-4" name="password_confirmation" placeholder="Repeti la contraseña" required>
-
-        
-                      <button type="submit" class="btn btn-primary btn-block">Confirm</button>
                     </div>
-  
-                  </form>
-                </div>
+                      <span class="text-danger" role="alert">
+                        <strong>{{ $errors->first('avatar') }}</strong>
+                      </span>
+                    </div>
+                  </div>
+            
+
+                  <div class="form-group row col-12">
+                    <select class="form-control" name="country" id="countries">
+                      <option value="">Elegí un país</option>
+                    </select>
+                      <span class="text-danger" role="alert">
+                        <strong>{{ $errors->first('country') }}</strong>
+                      </span>
+                  </div>
+
+                  <div class="form-group row col-12" id="cityCont" style="display: none;" >
+                    <select class="form-control" name="city" id="cities">            
+                    </select>
+                  </div>
+
+                  <input id="password" type="password" class="form-control mb-1{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Contraseña" required>
+
+                      <span id="error_password" class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                      </span>
+
+                  <input id="password_confirm" type="password" class="form-control mb-4" name="password_confirmation" placeholder="Repeti la contraseña" required>
+                      <span id="error_password_confirm" class="invalid-feedback" role="alert">
+                        <strong></strong>
+                      </span>
+
+                  <button type="submit" class="btn btn-primary btn-block">Confirm</button>
+                  </div>
+                 </div>
+
+                </form>
               </div>
             </div>
           </div>
+        </div>
 
         <!-- Blog Entries Column -->
         <div class="col-md-12">
@@ -160,18 +157,6 @@
     </div>
     <!-- /.container -->
 
-    <!-- Footer -->
-    <footer class="py-5 bg-nav-color">
-      <div class="container">
-        <p class="m-0 text-center text-black">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
-    </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
-  </body>
 
 @endsection

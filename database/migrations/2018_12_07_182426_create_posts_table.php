@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 100)->nullable();
             $table->string('text', 600);
             $table->string('attached', 100)->nullable();
+            $table->string('country', 100);
         });
     }
 
