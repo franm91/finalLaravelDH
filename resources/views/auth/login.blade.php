@@ -1,4 +1,5 @@
 @extends('templates.base')
+@section('title', 'Login - Meet Travelers')
 
 @section('content')
 <div class="container">

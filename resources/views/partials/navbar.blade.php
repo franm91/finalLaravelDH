@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-nav-color">
    <div class="container">
-      <a class="navbar-brand" href="/index"> <img src="{{asset('images/mundo.png')}}" style="width:50px" alt=""> Meet Travelers</a>  
+      <a class="navbar-brand" href="/posts"> <img src="{{asset('images/mundo.png')}}" style="width:50px" alt=""> Meet Travelers</a>  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>

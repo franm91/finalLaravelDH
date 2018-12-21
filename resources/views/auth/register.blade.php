@@ -1,4 +1,5 @@
 @extends('templates.base')
+@section('title', 'Registarte en Meet Travelers')
 
 @section('content')
 <script>

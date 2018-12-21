@@ -126,7 +126,7 @@ class PostsController extends Controller
     
 
     public function byCountry($country){
-        $posts = \App\Post::where('country', $country)->get();
+        $posts = \App\Post::where('country', $country)->paginate(5);
         return view('country.country')->with(compact('posts'));
     }
 }

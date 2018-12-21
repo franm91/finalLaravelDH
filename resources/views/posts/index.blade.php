@@ -13,18 +13,7 @@
                <!-- Sidebar Widgets Column -->
                <div class="col-lg-4 col-md-4 oculto-sm">
 
-                  <!-- Search Widget -->
-                  <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+       
         
                   <!-- Categories Widget -->
                   <div class="card my-4">
@@ -33,33 +22,33 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <ul class="list-unstyled mb-0">
-                            @for ($i = 0; $i < 3; $i++)
+                       
                               <li>
-                                <a href="#">W</a>
+                                <a href="/country/Argentina">Argentina</a>
                               </li>
-                            @endfor
+                              <li>
+                                  <a href="/country/Uruguay">Uruguay</a>
+                                </li>
+                    
                           </ul>
                         </div>
                         <div class="col-lg-6">
                           <ul class="list-unstyled mb-0">
-                              @for ($i = 0; $i < 3; $i++)
+                           
                               <li>
-                                <a href="#">W</a>
+                                <a href="/country/Brasil">Brasil</a>
                               </li>
-                              @endfor
+                              <li>
+                                  <a href="/country/Chile">Chile</a>
+                              </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
         
-                  <!-- Side Widget -->
-                  <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                      You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                    </div>
-                  </div>
+         
+                
         
                 </div>
 
@@ -167,7 +156,7 @@
                     
            
               <div class="card mb-4">
-                <a href="#">
+                <a href="/posts/{{$post->id}}">
                   <div class="card-header text-dark">
                     <img class="rounded-circle"src="storage/avatars/{{$post->user->avatar}}" width="30px" alt=""> {{$post->user->getFullName()}}
                   </div>
@@ -175,7 +164,7 @@
               <div class="card-body">
                 <h2 class="card-title">{{$post->title}}</h2>
                 @if ($post->attached !== null)
-                <img class="card-img-top" src="storage/posts/{{$post->attached}}" alt="Card image cap">
+                <img class="card-img-top" src="/storage/posts/{{$post->attached}}" alt="Card image cap">
                 @endif
               </div>
               <div class="card-body">
@@ -183,7 +172,7 @@
                 {{-- <a href="#" class="btn btn-primary">Read More &rarr;</a> --}}
               </div>
               <div class="card-footer text-muted">
-                Posteado el: {{$post->created_at}}
+                Posteado el: {{$post->created_at}} desde  <a href="/country/{{$post->country}}"> {{$post->country}}</a>
               </div>
             </div>
 

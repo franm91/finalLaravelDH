@@ -127,13 +127,13 @@
                     
            
             <div class="card mb-4">
-              <a href="/profile">
+              <a href="/posts/{{$post->id}}">
                 <div class="card-header text-dark">
                   <img class="rounded-circle"src="storage/avatars/{{$post->user->avatar}}" width="30px" alt=""> {{$post->user->getFullName()}}
                 </div>
               </a>
             <div class="card-body">
-              <h2 class="card-title">{{$post->title}}</h2>
+              <h2 class="card-title"> <a href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
               @if ($post->attached !== null)
               <img class="card-img-top" src="storage/posts/{{$post->attached}}" alt="Card image cap">
               @endif

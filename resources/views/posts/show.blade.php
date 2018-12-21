@@ -14,18 +14,6 @@
                <!-- Sidebar Widgets Column -->
                <div class="col-lg-4 col-md-4 oculto-sm">
 
-                  <!-- Search Widget -->
-                  <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
         
                   <!-- Categories Widget -->
                   <div class="card my-4">
@@ -62,13 +50,7 @@
                     </div>
                   </div>
         
-                  <!-- Side Widget -->
-                  <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                      You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                    </div>
-                  </div>
+             
         
                 </div>
 
@@ -97,7 +79,9 @@
 
               </div>
               
-             {{$post->attached ? '<img class="card-img" src="storage/avatars/" alt="Card image cap">' : ""}}
+              @if ($post->attached !== null)
+                <img class="card-img-top" src="/storage/posts/{{$post->attached}}" alt="Card image cap">
+                @endif
 
               <div class="card-body">
                 <h2 class="card-title">{{$post->title}}</h2>
@@ -105,24 +89,27 @@
                 {{-- <a href="#" class="btn btn-primary">Read More &rarr;</a> --}}
               </div>
               <div class="card-footer text-muted">
-                {{$post->created_at}}
-                <a href="#"></a>
+                Posteado el: {{$post->created_at}} desde  <a href="/country/{{$post->country}}"> {{$post->country}}</a>
+
+
+                @auth
+                @if ($post->user_id == Auth::user()->id )
+                  
+                  <form action="/posts/{{ $post->id }}" method="post" style="display: inline-block;">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button id="delete" type="submit" class="btn btn-outline-danger">Delete</button>
+                  </form>
+                @endif
+              @endauth
+            
+            
+          
               </div>
             </div>
     
           
-          
-          
-          <!-- Pagination -->
-          <ul class="pagination justify-content-center mb-4">
-            <li class="page-item">
-              <a class="page-link" href="#">&larr; Older</a>
-            </li>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">Newer &rarr;</a>
-            </li>
-          </ul>
-
+   
         </div>
 
        
